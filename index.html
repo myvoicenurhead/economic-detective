@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#101a2b">
+<meta name="description" content="Интерактивный веб-квест по обществознанию для 9 класса: деньги, инфляция и роль государства в экономике.">
+<title>Экономический детектив — тайна исчезающих денег</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap');
+:root{
+ --bg:#0b1321;--panel:#121f32;--panel2:#17283e;--ink:#f3efe6;--muted:#aab5c4;
+ --gold:#d6b36b;--gold2:#f0d79d;--red:#a84b52;--line:rgba(214,179,107,.23);
+ --green:#77b99a;--shadow:0 22px 65px rgba(0,0,0,.28);--radius:22px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{width:100%;min-width:0;overflow-x:hidden;margin:0;background:radial-gradient(ellipse at 12% 0%,#1b2b42 0,transparent 38%),radial-gradient(ellipse at 100% 30%,#251e2b 0,transparent 32%),var(--bg);color:var(--ink);font-family:Manrope,Arial,sans-serif;line-height:1.55}
+button,input,textarea{font:inherit}
+button{cursor:pointer}
+a{color:var(--gold2)}
+.shell{width:100%;max-width:1480px;margin:0 auto;padding:clamp(12px,2.4vw,34px)}
+.topbar{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:8px 0 24px;border-bottom:1px solid var(--line)}
+.brand{display:flex;align-items:center;gap:12px;font-weight:800;letter-spacing:.04em}
+.seal{width:44px;height:44px;border:1px solid var(--gold);border-radius:50%;display:grid;place-items:center;color:var(--gold);font-family:Georgia,serif;font-size:21px;box-shadow:inset 0 0 0 4px rgba(214,179,107,.1)}
+.topmeta{font-size:12px;color:var(--muted);text-align:right;letter-spacing:.12em;text-transform:uppercase}
+.hero{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:clamp(16px,3vw,42px);align-items:center;padding:clamp(24px,4vw,56px) 0 34px}
+.eyebrow{color:var(--gold);font-size:12px;letter-spacing:.2em;text-transform:uppercase;font-weight:800}
+h1,h2,h3{font-family:"Playfair Display",Georgia,serif;line-height:1.12;margin:10px 0 16px}
+h1{font-size:clamp(38px,6vw,68px);max-width:720px}
+h2{font-size:clamp(29px,4vw,42px)}
+h3{font-size:25px}
+.lead{font-size:17px;color:#c5ced8;max-width:650px}
+.stamp{display:inline-block;border:2px solid #bd6268;color:#e48c8e;padding:7px 13px;transform:rotate(-5deg);font-weight:800;letter-spacing:.15em;font-size:12px;margin:12px 0}
+.hero-art,.art-card{border:1px solid var(--line);border-radius:28px;background:linear-gradient(145deg,#1b2c43,#101a2b);overflow:hidden;box-shadow:var(--shadow);position:relative}
+.hero-art{min-height:320px;display:grid;place-items:center;padding:18px}
+.hero-art:after{content:"";position:absolute;inset:12px;border:1px solid rgba(214,179,107,.17);border-radius:20px;pointer-events:none}
+.hero-art svg{width:100%;height:auto;max-height:350px}
+.btn{border:0;border-radius:999px;padding:13px 22px;font-weight:800;transition:.2s;display:inline-flex;align-items:center;justify-content:center;gap:9px}
+.btn:hover{transform:translateY(-2px);filter:brightness(1.08)}
+.btn-primary{background:linear-gradient(135deg,#e5c783,#b68d47);color:#182235;box-shadow:0 8px 24px rgba(214,179,107,.18)}
+.btn-ghost{background:#1b2b42;border:1px solid var(--line);color:var(--ink)}
+.btn-small{padding:9px 15px;font-size:13px}
+.notice{color:var(--muted);font-size:13px;margin-top:12px}
+.evidence-strip{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0}
+.evidence-strip span{font-size:11px;letter-spacing:.04em;color:#e7d5ad;border:1px solid var(--line);background:rgba(214,179,107,.07);padding:7px 10px;border-radius:999px}
+.case-note{display:flex;gap:12px;align-items:flex-start;padding:13px 15px;border:1px solid var(--line);border-radius:14px;background:linear-gradient(120deg,rgba(214,179,107,.09),rgba(17,29,46,.3));margin:14px 0}
+.case-note b{color:var(--gold2)}
+.stage-art{position:relative}
+.stage-art:after{content:"АРХИВ · ДОКАЗАТЕЛЬСТВО";position:absolute;bottom:9px;right:13px;font-size:8px;letter-spacing:.2em;color:rgba(240,215,157,.55)}
+.hero-art{isolation:isolate}
+.hero-art:before{content:"";position:absolute;width:220px;height:220px;border-radius:50%;background:radial-gradient(circle,rgba(214,179,107,.16),transparent 70%);top:-55px;right:-45px;z-index:-1}
+
+.dashboard{display:grid;grid-template-columns:minmax(0,.82fr) minmax(0,1.5fr);gap:18px;margin:18px 0 30px}
+.panel{background:linear-gradient(145deg,rgba(24,40,61,.96),rgba(17,29,46,.96));border:1px solid var(--line);border-radius:var(--radius);padding:22px;box-shadow:var(--shadow)}
+.panel h3{margin-top:0}
+.progress-head{display:flex;justify-content:space-between;gap:12px;font-size:13px;color:var(--muted)}
+.progress-track{height:9px;background:#0a1422;border-radius:20px;overflow:hidden;margin:12px 0}
+.progress-fill{height:100%;width:0;background:linear-gradient(90deg,#a77d3e,#efd392);transition:width .35s}
+.route{display:grid;grid-template-columns:repeat(5,1fr);gap:9px}
+.route-item{border:1px solid var(--line);background:#101d2e;border-radius:15px;padding:12px 8px;text-align:center;color:var(--muted);font-size:11px;min-height:95px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px;transition:.2s}
+.route-item .num{width:29px;height:29px;border:1px solid #8e754a;border-radius:50%;display:grid;place-items:center;color:var(--gold);font-weight:800;font-size:12px}
+.route-item.active{border-color:var(--gold);background:#26334a;color:var(--ink);box-shadow:0 0 0 1px rgba(214,179,107,.14)}
+.route-item.done .num{background:#315c4d;border-color:#77b99a;color:#fff}
+.stage{display:none;animation:fade .35s ease}
+.stage.active{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.stage-head{display:grid;grid-template-columns:minmax(0,1fr) minmax(190px,290px);gap:20px;align-items:center;margin-bottom:20px}
+.stage-art{border-radius:20px;border:1px solid var(--line);background:linear-gradient(145deg,#22334a,#121e30);padding:12px;min-height:150px;display:grid;place-items:center}
+.stage-art svg{width:100%;max-height:170px}
+.kicker{font-size:12px;letter-spacing:.15em;color:var(--gold);font-weight:800;text-transform:uppercase}
+.story{color:#c6cfda;background:rgba(214,179,107,.07);border-left:3px solid var(--gold);padding:15px 18px;border-radius:0 14px 14px 0;margin:18px 0}
+.task{background:rgba(19,32,50,.92);border:1px solid var(--line);border-radius:18px;padding:20px;margin:15px 0}
+.task h3{font-size:21px;margin:0 0 12px}
+.task p{color:#c1cbd7;margin:8px 0}
+.question{padding:12px 0;border-bottom:1px solid rgba(255,255,255,.07)}
+.question:last-child{border-bottom:0}
+.options{display:grid;gap:8px;margin-top:10px}
+.option{display:flex;gap:10px;align-items:flex-start;padding:11px 13px;background:#0f1b2b;border:1px solid rgba(255,255,255,.08);border-radius:12px;cursor:pointer}
+.option:hover{border-color:rgba(214,179,107,.55)}
+.option input{accent-color:#d6b36b;margin-top:5px}
+select,.field,textarea{width:100%;background:#0b1727;color:var(--ink);border:1px solid #43516a;border-radius:11px;padding:12px;outline:none}
+select:focus,.field:focus,textarea:focus{border-color:var(--gold)}
+textarea{min-height:100px;resize:vertical}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.feedback{font-size:13px;margin-top:10px;min-height:20px;color:var(--muted)}
+.feedback.good{color:#8bd1ad}.feedback.bad{color:#ed9b9b}
+.table-wrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;min-width:430px}
+th,td{text-align:left;padding:10px;border-bottom:1px solid rgba(255,255,255,.09)}
+th{color:var(--gold2);font-size:13px}
+td{color:#d5dce4}
+.metric{font-family:"Playfair Display",Georgia,serif;font-size:34px;color:var(--gold2)}
+.hint{display:none;background:#2b2b2a;border:1px dashed #9d8250;border-radius:12px;padding:12px;color:#e8d9b8;font-size:13px;margin-top:10px}
+.hint.show{display:block}
+.actions{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin:24px 0 50px}
+.result-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.result-tile{background:#0e1a2a;border:1px solid var(--line);border-radius:15px;padding:16px}
+.result-tile strong{display:block;font-size:25px;color:var(--gold2);font-family:"Playfair Display",Georgia,serif}
+.certificate{border:2px solid var(--gold);outline:1px solid rgba(214,179,107,.25);outline-offset:-9px;border-radius:22px;padding:35px;text-align:center;background:radial-gradient(circle at center,#27364a,#111d2e 68%);margin:18px 0}
+.certificate .bigseal{font-size:45px;color:var(--gold)}
+.footer{border-top:1px solid var(--line);padding:22px 0;color:#8492a4;font-size:12px;text-align:center}
+.small{font-size:12px;color:var(--muted)}
+.hidden{display:none!important}
+.route-item{min-height:84px}
+}
+.hero{grid-template-columns:1fr;padding-top:30px}.hero-art{min-height:230px}
+ .dashboard{grid-template-columns:1fr}.stage-head{grid-template-columns:1fr}.stage-art{min-height:130px}
+ .route{grid-template-columns:repeat(5,minmax(82px,1fr));overflow-x:auto;padding-bottom:5px}
+ .route-item{min-height:82px}.route-item span:last-child{font-size:10px}
+ .grid2{grid-template-columns:1fr}.result-grid{grid-template-columns:1fr}
+ .topmeta{font-size:10px}.panel{padding:17px}.task{padding:16px}
+}
+.lead{font-size:15px}.route{grid-template-columns:repeat(5,minmax(72px,1fr))}
+ .route-item{padding:9px 5px}.btn{width:100%}.actions{gap:9px}
+ .topbar{align-items:flex-start}.topmeta{max-width:125px}
+}
+
+/* Адаптация для встроенного блока Google Sites */
+html,body{width:100%;min-width:0;max-width:100%;margin:0;overflow-x:hidden}
+body{font-size:clamp(14px,1.05vw,16px)}
+.shell{width:100%;max-width:none;min-width:0;margin:0;padding:clamp(12px,2.2vw,30px)}
+.shell>*{min-width:0;max-width:100%}
+.hero,.dashboard,.stage-head,.grid2,.result-grid{min-width:0}
+.hero{grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr)}
+.hero>* , .stage-head>*{min-width:0}
+.hero-art,.art-card,.stage-art{width:100%;min-width:0}
+svg,img,video,canvas{max-width:100%;height:auto}
+input,textarea,select{max-width:100%;min-width:0}
+.route{min-width:0}
+@media(max-width:900px){
+ .hero{grid-template-columns:minmax(0,1fr);padding-top:28px}
+ .hero-art{min-height:clamp(180px,34vw,280px)}
+ .dashboard{grid-template-columns:minmax(0,1fr)}
+ .stage-head{grid-template-columns:minmax(0,1fr)}
+ .stage-art{min-height:150px}
+ .grid2,.result-grid{grid-template-columns:minmax(0,1fr)}
+}
+@media(max-width:560px){
+ .shell{padding:12px}
+ .topbar{align-items:flex-start;gap:10px}
+ .brand{gap:8px;font-size:13px}
+ .seal{width:36px;height:36px;font-size:18px}
+ .topmeta{font-size:9px;max-width:120px}
+ h1{font-size:clamp(34px,9vw,44px)}
+ h2{font-size:clamp(27px,7vw,34px)}
+ .lead{font-size:15px}
+ .hero{gap:18px;padding:22px 0}
+ .hero-art{min-height:170px;padding:10px}
+ .route{grid-template-columns:repeat(5,minmax(68px,1fr));overflow-x:auto;padding-bottom:7px}
+ .route-item{min-height:76px;padding:8px 5px}
+ .route-item span:last-child{font-size:10px}
+ .panel{padding:15px}
+ .task{padding:14px}
+ .btn{max-width:100%}
+}
+@media(max-width:380px){
+ .shell{padding:9px}
+ .topmeta{display:none}
+ .route{grid-template-columns:repeat(5,minmax(62px,1fr))}
+}
+
+@media print{body{background:#fff;color:#111}.shell>*:not(#final){display:none!important}#final{display:block!important}.panel,.certificate{background:#fff;color:#111;box-shadow:none}.footer,.actions{display:none}}
+
+/* Иллюстративное оформление: архивные материалы и мягкое свечение */
+.hero-art,.stage-art{isolation:isolate}
+.hero-art{background:
+ radial-gradient(ellipse at 18% 82%,rgba(168,75,82,.16),transparent 35%),
+ radial-gradient(ellipse at 82% 18%,rgba(214,179,107,.17),transparent 38%),
+ linear-gradient(145deg,#20344d,#0d1828)}
+.stage-art{background:
+ radial-gradient(ellipse at 15% 15%,rgba(214,179,107,.13),transparent 45%),
+ linear-gradient(145deg,#263b52,#111d2e)}
+.stage-art:before{content:"";position:absolute;inset:8px;border:1px dashed rgba(214,179,107,.18);border-radius:14px;pointer-events:none}
+.stage-art svg{position:relative;z-index:1;filter:drop-shadow(0 8px 12px rgba(0,0,0,.18));transition:transform .35s ease}
+.stage-art:hover svg{transform:translateY(-3px) scale(1.015)}
+.hero-art svg{filter:drop-shadow(0 12px 18px rgba(0,0,0,.25))}
+.evidence-strip span{box-shadow:inset 0 0 16px rgba(214,179,107,.035)}
+.route-item{position:relative;overflow:hidden}
+.route-item:after{content:"";position:absolute;inset:auto -25% -35% -25%;height:50%;background:radial-gradient(ellipse,rgba(214,179,107,.10),transparent 70%);opacity:0;transition:.2s}
+.route-item:hover:after,.route-item.active:after{opacity:1}
+@media(prefers-reduced-motion:reduce){.stage-art svg,.route-item:after{transition:none}}
+
+
+/* Усиленная адаптация для телефона в вертикальной ориентации */
+@media screen and (orientation:portrait) and (max-width:900px) {
+  html, body { width:100% !important; min-width:0 !important; max-width:100% !important; overflow-x:hidden !important; }
+  .shell { width:100% !important; max-width:100% !important; padding:12px !important; }
+  .hero { display:flex !important; flex-direction:column !important; align-items:stretch !important; gap:16px !important; padding:22px 0 !important; }
+  .hero > * { width:100% !important; min-width:0 !important; }
+  .hero-art { min-height:0 !important; padding:10px !important; }
+  .hero-art svg { width:100% !important; max-height:240px !important; }
+  .dashboard, .stage-head, .grid2, .result-grid { display:grid !important; grid-template-columns:minmax(0,1fr) !important; width:100% !important; }
+  .stage-head { gap:12px !important; }
+  .stage-art { width:100% !important; min-height:0 !important; padding:8px !important; }
+  .stage-art svg { width:100% !important; max-height:190px !important; }
+  .route { display:flex !important; width:100% !important; gap:7px !important; overflow-x:auto !important; }
+  .route-item { flex:0 0 66px !important; min-width:0 !important; min-height:72px !important; padding:7px 4px !important; }
+  .route-item * { max-width:100% !important; overflow-wrap:anywhere !important; }
+  .panel, .task, .art-card { min-width:0 !important; max-width:100% !important; padding:14px !important; }
+  .actions { display:flex !important; flex-direction:column !important; align-items:stretch !important; gap:10px !important; }
+  .actions .btn, .btn { width:100% !important; max-width:100% !important; white-space:normal !important; }
+  input, textarea, select { width:100% !important; min-width:0 !important; }
+  h1 { font-size:clamp(32px,9vw,44px) !important; overflow-wrap:anywhere; }
+  h2 { font-size:clamp(26px,7vw,34px) !important; }
+  .lead { font-size:15px !important; }
+  .topbar { flex-wrap:wrap !important; }
+  .topmeta { max-width:100% !important; text-align:left !important; }
+}
+@media screen and (max-width:430px) {
+  .shell { padding:9px !important; }
+  .panel, .task { padding:12px !important; border-radius:15px !important; }
+  .route-item { flex-basis:60px !important; }
+  .eyebrow { font-size:10px !important; letter-spacing:.13em !important; }
+  .stamp { font-size:10px !important; }
+}
+
+
+/* Видеоулики RuTube / VK */
+.video-evidence{margin:24px 0;padding:clamp(15px,2.4vw,24px);border:1px solid rgba(214,179,107,.28);border-radius:20px;background:linear-gradient(145deg,rgba(28,45,66,.96),rgba(15,26,42,.96));box-shadow:0 12px 32px rgba(0,0,0,.18);min-width:0}
+.video-evidence-head{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.video-kicker{font-size:10px;letter-spacing:.18em;color:var(--gold);font-weight:800}
+.video-platforms{font-size:11px;color:var(--muted)}
+.video-evidence h3{margin:10px 0 7px;font-size:23px}
+.video-hint{margin:0 0 13px;color:var(--muted);font-size:13px}
+.video-controls{display:flex;gap:9px;min-width:0}
+.video-url{flex:1 1 240px;width:100%;min-width:0;padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:#0b1524;color:var(--ink);outline:none}
+.video-url:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(214,179,107,.12)}
+.video-load{flex:0 0 auto;padding:11px 17px}
+.video-frame-wrap{position:relative;width:100%;aspect-ratio:16/9;margin-top:15px;overflow:hidden;border:1px solid var(--line);border-radius:14px;background:#050a12}
+.video-frame{position:absolute;inset:0;width:100%;height:100%;border:0}
+.video-error{min-height:0;margin:7px 0 0;color:#e5a1a1;font-size:12px}
+.video-error:empty{display:none}
+@media(max-width:560px),(orientation:portrait) and (max-width:900px){
+ .video-controls{flex-direction:column}
+ .video-load{width:100%}
+ .video-evidence{padding:13px;border-radius:15px}
+ .video-evidence h3{font-size:21px}
+}
+
+</style>
+</head>
+<body>
+<div class="shell">
+<header class="topbar">
+ <div class="brand"><div class="seal">ЭД</div><div><div>ЭКОНОМИЧЕСКИЙ</div><div style="color:var(--gold);font-size:12px;letter-spacing:.2em">АНАЛИТИЧЕСКИЙ ОТДЕЛ</div></div></div>
+ <div class="topmeta">Архив расследований<br><b style="color:var(--gold2)">Дело № 026 · Доступ открыт</b></div>
+</header>
+
+<section class="hero" id="intro">
+ <div>
+  <div class="eyebrow">Секретное дело № 026 · Требуется расследование</div>
+  <h1>Тайна исчезающих денег</h1>
+  <p class="lead">В стране Экономия цены растут, а привычной суммы денег хватает на всё меньшее количество товаров. Правительство поручило вам выяснить, что происходит с покупательной способностью денег.</p>
+  <div class="stamp">СЕКРЕТНО · ДЛЯ АНАЛИТИКОВ</div>
+  <div class="grid2" style="max-width:560px;margin:12px 0"><label class="small">Имя аналитика<input class="field" id="studentName" maxlength="60" placeholder="Как к вам обращаться?"></label><label class="small">Класс<input class="field" id="studentClass" maxlength="12" placeholder="Например, 9А"></label></div>
+  <p>Вам предстоит пройти пять этапов, собрать доказательства и подготовить итоговое экономическое заключение.</p>
+  <div class="evidence-strip"><span>✦ 5 этапов расследования</span><span>◈ 30 баллов</span><span>⌁ 45 минут</span></div>
+  <button class="btn btn-primary" onclick="startQuest()">Начать расследование <span>→</span></button>
+  <div class="notice">Время прохождения: около 45 минут · Индивидуальная работа · Максимум 30 баллов</div>
+ </div>
+ <div class="hero-art" aria-label="Иллюстрация детективного расследования">
+  <svg viewBox="0 0 560 360" role="img">
+   <defs><linearGradient id="desk" x2="1" y2="1"><stop stop-color="#31445b"/><stop offset="1" stop-color="#111d2d"/></linearGradient><filter id="shadow"><feGaussianBlur stdDeviation="7"/></filter></defs>
+   <ellipse cx="282" cy="315" rx="220" ry="22" fill="#050b13" opacity=".55" filter="url(#shadow)"/>
+   <path d="M58 62 Q280 15 502 62 L486 296 Q280 335 74 296Z" fill="url(#desk)" stroke="#b48e50" stroke-opacity=".6"/>
+   <path d="M102 91 L279 75 L300 265 L119 281Z" fill="#d9c69e" transform="rotate(-5 200 180)"/>
+   <path d="M126 119 L258 107 M130 145 L251 132 M134 171 L260 159 M139 197 L242 187" stroke="#887653" stroke-width="4" opacity=".6"/>
+   <path d="M314 105 L440 88 L456 238 L330 252Z" fill="#eee2c3" transform="rotate(7 385 170)"/>
+   <text x="346" y="133" font-size="13" fill="#594b35" font-weight="bold" transform="rotate(7 385 170)">ДОКАЗАТЕЛЬСТВО</text>
+   <path d="M348 153 L423 162 M344 174 L418 183 M342 195 L410 204" stroke="#8c7957" stroke-width="3" transform="rotate(7 385 170)"/>
+   <circle cx="380" cy="211" r="28" fill="none" stroke="#a84950" stroke-width="5"/><path d="M400 231 L438 269" stroke="#a84950" stroke-width="9" stroke-linecap="round"/>
+   <g transform="translate(95 230) rotate(-13)"><rect width="118" height="62" rx="6" fill="#577c69" stroke="#d7bd7d" stroke-width="2"/><circle cx="59" cy="31" r="20" fill="none" stroke="#d8c28e" stroke-width="2"/><text x="59" y="37" text-anchor="middle" fill="#e8d9ae" font-size="19">₽</text></g>
+   <g transform="translate(415 50)"><circle r="27" fill="#a84b52"/><text y="7" text-anchor="middle" font-size="22" fill="#fff">!</text></g>
+   <path d="M74 66 L98 46 L121 66" fill="none" stroke="#d6b36b" stroke-width="3"/>
+   <text x="280" y="326" text-anchor="middle" fill="#d6b36b" font-size="12" letter-spacing="4">ЭКОНОМИЧЕСКИЙ ДЕТЕКТИВ</text>
+  </svg>
+ </div>
+</section>
+
+<section id="game" class="hidden">
+ <div class="dashboard">
+  <div class="panel">
+   <div class="progress-head"><span>ХОД РАССЛЕДОВАНИЯ</span><b id="progressText">0 из 5 этапов</b></div>
+   <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+   <div class="progress-head"><span>Набрано баллов</span><b><span id="liveScore">0</span> / 30</b></div>
+   <p class="small">Ответы сохраняются в этом браузере на данном устройстве. Чтобы передать результат учителю, распечатайте итоговый экран или сохраните его в PDF.</p>
+  </div>
+  <div class="panel">
+   <h3>Маршрут расследования</h3>
+   <div class="route" id="route">
+    <button class="route-item active" onclick="goStage(0)"><span class="num">01</span><span>Следы на денежных купюрах</span></button>
+    <button class="route-item" onclick="goStage(1)"><span class="num">02</span><span>Куда исчезают деньги?</span></button>
+    <button class="route-item" onclick="goStage(2)"><span class="num">03</span><span>Экономическая лаборатория</span></button>
+    <button class="route-item" onclick="goStage(3)"><span class="num">04</span><span>Государство против инфляции</span></button>
+    <button class="route-item" onclick="goStage(4)"><span class="num">05</span><span>Последняя улика</span></button>
+   </div>
+  </div>
+ </div>
+
+<!-- ЭТАП 1 -->
+<section class="stage active" id="stage0">
+ <div class="stage-head">
+  <div><div class="kicker">Этап 01 · Изучение улик</div><h2>Следы на денежных купюрах</h2><p class="lead">Прежде чем искать причины исчезновения покупательной способности денег, разберитесь, что такое деньги и какую роль они играют в экономике.</p></div>
+  <div class="stage-art"><svg viewBox="0 0 360 190" role="img" aria-label="Денежные купюры, монеты и лупа">
+<defs>
+ <linearGradient id="s1paper" x2="1" y2="1"><stop stop-color="#78927b"/><stop offset="1" stop-color="#345b50"/></linearGradient>
+ <linearGradient id="s1gold" x2="1" y2="1"><stop stop-color="#f2d99c"/><stop offset="1" stop-color="#a77c3d"/></linearGradient>
+ <filter id="s1shadow"><feGaussianBlur stdDeviation="5"/></filter>
+</defs>
+<ellipse cx="176" cy="164" rx="130" ry="13" fill="#050b13" opacity=".55" filter="url(#s1shadow)"/>
+<g transform="rotate(-8 130 95)"><rect x="34" y="48" width="188" height="100" rx="9" fill="url(#s1paper)" stroke="#d7bd7d" stroke-width="2.5"/><rect x="44" y="58" width="168" height="80" rx="5" fill="none" stroke="#d7bd7d" opacity=".65"/><circle cx="128" cy="98" r="31" fill="none" stroke="#d7bd7d" stroke-width="2"/><path d="M66 77h28m72 43h25" stroke="#e8d9ae" stroke-width="3" opacity=".8"/><text x="128" y="109" text-anchor="middle" fill="#f2dfb0" font-size="34" font-family="Georgia">₽</text></g>
+<g transform="rotate(8 230 82)"><rect x="153" y="27" width="166" height="89" rx="8" fill="#c6a968" stroke="#f1dca7" stroke-width="2.5"/><rect x="162" y="36" width="148" height="71" rx="4" fill="none" stroke="#725a32" opacity=".6"/><circle cx="236" cy="71" r="24" fill="none" stroke="#725a32" stroke-width="2"/><text x="236" y="81" text-anchor="middle" fill="#725a32" font-size="29" font-family="Georgia">₽</text></g>
+<g><circle cx="82" cy="151" r="18" fill="url(#s1gold)" stroke="#f5e1ad" stroke-width="2"/><circle cx="82" cy="151" r="12" fill="none" stroke="#86683c"/><circle cx="113" cy="159" r="12" fill="#b9a16d" stroke="#f1dca7" stroke-width="2"/></g>
+<g transform="translate(255 102) rotate(-17)"><circle cx="0" cy="0" r="27" fill="none" stroke="#d9e0e5" stroke-width="7"/><circle cx="0" cy="0" r="19" fill="#8ca1ae" opacity=".12"/><path d="M20 20L54 54" stroke="#d6b36b" stroke-width="10" stroke-linecap="round"/><path d="M20 20L54 54" stroke="#f2d99c" stroke-width="3" stroke-linecap="round"/></g>
+<text x="180" y="184" text-anchor="middle" fill="#d6b36b" font-size="9" letter-spacing="3">ДЕНЬГИ · ФУНКЦИИ · ДОВЕРИЕ</text>
+</svg></div>
+ </div>
+ <div class="story">«Перед вами денежные купюры и документы. Найдите первую улику: установите, какие функции выполняют деньги и что означает их покупательная способность».</div>
+ <div class="task">
+  <h3>Задание 1. Денежный шифр <span class="small">· 4 балла</span></h3>
+  <p>Соотнесите экономическую ситуацию с функцией денег.</p>
+  <div id="matchMoney"></div>
+  <button class="btn btn-ghost btn-small" onclick="checkMoney()">Проверить соответствия</button><div class="feedback" id="moneyFeedback"></div>
+  <button class="btn btn-ghost btn-small" onclick="toggleHint('hint1')">Открыть подсказку</button><div class="hint" id="hint1">Подумайте: при покупке деньги выступают посредником обмена; при установлении цены помогают сравнить стоимость; при погашении долга выполняют функцию средства платежа.</div>
+ </div>
+ <div class="task">
+  <h3>Задание 2. Главная улика <span class="small">· 1 балл</span></h3>
+  <p>Своими словами объясните, что такое деньги, назовите их основные функции и раскройте понятие покупательной способности.</p>
+  <textarea id="moneyOpen" placeholder="Запишите ответ здесь..."></textarea>
+  <label class="option"><input type="checkbox" id="moneySelf"> В моём ответе есть определение денег, функции денег и объяснение покупательной способности.</label>
+  <p class="small">Один балл засчитывается по вашей самооценке полноты ответа.</p>
+ </div>
+ <div class="actions"><span></span><button class="btn btn-primary" onclick="completeStage(0)">Перейти к следующей улике →</button></div>
+
+ <div class="video-evidence" data-video-stage="0">
+   <div class="video-evidence-head">
+    <span class="video-kicker">МУЛЬТИМЕДИЙНАЯ УЛИКА</span>
+    <span class="video-platforms">RuTube · VK Видео</span>
+   </div>
+   <h3>Видеоматериал к этапу 1</h3>
+   <p class="video-hint">Нажмите кнопку, чтобы посмотреть видеозапись и продолжить расследование.</p>
+   <button class="btn btn-primary video-load" type="button">▶ Смотреть видео</button>
+   <div class="video-frame-wrap" hidden>
+    <iframe class="video-frame" title="Видеоматериал к этапу 1" allow="autoplay; encrypted-media; fullscreen; picture-in-picture" allowfullscreen loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+   </div>
+   <p class="video-error" role="status" aria-live="polite"></p>
+  </div>
+
+</section>
+
+<!-- ЭТАП 2 -->
+<section class="stage" id="stage1">
+ <div class="stage-head">
+  <div><div class="kicker">Этап 02 · Поиск причин</div><h2>Куда исчезают деньги?</h2><p class="lead">Деньги продолжают существовать, но их покупательная способность снижается. Возможно, дело в инфляции.</p></div>
+  <div class="stage-art"><svg viewBox="0 0 360 190" role="img" aria-label="Корзина продуктов и растущие ценники">
+<defs><linearGradient id="s2basket" x2="0" y2="1"><stop stop-color="#b98d50"/><stop offset="1" stop-color="#6b4d32"/></linearGradient><filter id="s2shadow"><feGaussianBlur stdDeviation="5"/></filter></defs>
+<ellipse cx="177" cy="164" rx="135" ry="12" fill="#050b13" opacity=".5" filter="url(#s2shadow)"/>
+<path d="M56 91h190l-17 63H75Z" fill="url(#s2basket)" stroke="#e0bd75" stroke-width="2.5"/><path d="M78 93q-5-67 68-67t70 67" fill="none" stroke="#d6b36b" stroke-width="7"/>
+<g><circle cx="105" cy="78" r="22" fill="#b84f4d"/><path d="M105 56q-7-12 3-17q11 8 4 17" fill="#71916c"/><circle cx="151" cy="69" r="25" fill="#d9b75f"/><path d="M149 44q-3-13 9-16q7 12-1 18" fill="#75936e"/><path d="M187 89q-17-30 7-44q30 10 14 44" fill="#77966f"/><path d="M189 86l18-31" stroke="#dce2b7" stroke-width="2"/></g>
+<g transform="translate(250 22)"><path d="M0 16h74v48H0z" fill="#e8dec5" stroke="#c6a968" stroke-width="2"/><text x="37" y="35" text-anchor="middle" fill="#6d5537" font-size="10" font-weight="bold">ЦЕНА</text><text x="37" y="54" text-anchor="middle" fill="#a84b52" font-size="17" font-weight="bold">↑ 25%</text><path d="M36 65v23" stroke="#d6b36b" stroke-width="3"/></g>
+<path d="M44 50L83 35 123 26 162 12 205 6" fill="none" stroke="#e0bd75" stroke-width="3.5" stroke-linecap="round"/><path d="M191 5l14 1-5 13" fill="none" stroke="#e0bd75" stroke-width="3.5"/>
+<text x="170" y="183" text-anchor="middle" fill="#d6b36b" font-size="9" letter-spacing="3">ПОКУПАТЕЛЬНАЯ СПОСОБНОСТЬ</text>
+</svg></div>
+ </div>
+ <div class="case-note"><span>🗂️</span><div><b>Материал дела 01</b><br>Изучите функции денег: средство обращения, мера стоимости, средство накопления и средство платежа.</div></div>
+ <div class="story">«Первая улика найдена. Теперь установите, что такое инфляция, чем она отличается от изменения цены одного товара и какие причины могут её вызвать».</div>
+ <div class="task">
+  <h3>Задание 1. Опознание экономического явления <span class="small">· 2 балла</span></h3>
+  <p>Выберите все ситуации, которые характеризуют инфляцию.</p>
+  <div class="options">
+   <label class="option"><input type="checkbox" name="inflationCase" value="A"> А. Цена на один сорт яблок выросла из-за неурожая.</label>
+   <label class="option"><input type="checkbox" name="inflationCase" value="B"> Б. За год значительно выросли цены на продукты, одежду, технику и услуги.</label>
+   <label class="option"><input type="checkbox" name="inflationCase" value="C"> В. Магазин снизил цену сезонной одежды после зимы.</label>
+   <label class="option"><input type="checkbox" name="inflationCase" value="D"> Г. Цены на большинство товаров и услуг устойчиво растут.</label>
+  </div>
+  <button class="btn btn-ghost btn-small" onclick="checkInflationCases()">Проверить</button><div class="feedback" id="inflationFeedback"></div>
+ </div>
+ <div class="task">
+  <h3>Задание 2. Поиск причин <span class="small">· 2 балла</span></h3>
+  <p>Установите соответствие между причиной инфляции и её характеристикой.</p>
+  <div class="grid2">
+   <label>Инфляция спроса<select id="demandCause"><option value="">Выберите характеристику</option><option value="A">Рост спроса при ограниченных возможностях производства</option><option value="B">Рост затрат на сырьё, энергию, транспорт и оплату труда</option></select></label>
+   <label>Инфляция издержек<select id="costCause"><option value="">Выберите характеристику</option><option value="A">Рост спроса при ограниченных возможностях производства</option><option value="B">Рост затрат на сырьё, энергию, транспорт и оплату труда</option></select></label>
+  </div>
+  <button class="btn btn-ghost btn-small" onclick="checkCauses()">Проверить</button><div class="feedback" id="causesFeedback"></div>
+ </div>
+ <div class="task">
+  <h3>Задание 3. Классификация <span class="small">· 2 балла</span></h3>
+  <p>Распределите виды инфляции по их характеристикам.</p>
+  <div class="grid2">
+   <label>Сравнительно невысокий и стабильный рост цен<select id="moderate"><option value="">Выберите вид</option><option>Умеренная</option><option>Галопирующая</option><option>Гиперинфляция</option></select></label>
+   <label>Быстрый, значительный рост цен<select id="galloping"><option value="">Выберите вид</option><option>Умеренная</option><option>Галопирующая</option><option>Гиперинфляция</option></select></label>
+   <label>Чрезвычайно высокий и неконтролируемый рост цен<select id="hyper"><option value="">Выберите вид</option><option>Умеренная</option><option>Галопирующая</option><option>Гиперинфляция</option></select></label>
+  </div>
+  <button class="btn btn-ghost btn-small" onclick="checkTypes()">Проверить</button><div class="feedback" id="typesFeedback"></div>
+  <button class="btn btn-ghost btn-small" onclick="toggleHint('hint2')">Открыть подсказку</button><div class="hint" id="hint2">Инфляция — устойчивое повышение общего уровня цен, а не просто подорожание одного товара.</div>
+ </div>
+ <div class="actions"><button class="btn btn-ghost" onclick="goStage(0)">← Назад</button><button class="btn btn-primary" onclick="completeStage(1)">Перейти в лабораторию →</button></div>
+
+ <div class="video-evidence" data-video-stage="1">
+   <div class="video-evidence-head">
+    <span class="video-kicker">МУЛЬТИМЕДИЙНАЯ УЛИКА</span>
+    <span class="video-platforms">RuTube · VK Видео</span>
+   </div>
+   <h3>Видеоматериал к этапу 2</h3>
+   <p class="video-hint">Нажмите кнопку, чтобы посмотреть видеозапись и продолжить расследование.</p>
+   <button class="btn btn-primary video-load" type="button">▶ Смотреть видео</button>
+   <div class="video-frame-wrap" hidden>
+    <iframe class="video-frame" title="Видеоматериал к этапу 2" allow="autoplay; encrypted-media; fullscreen; picture-in-picture" allowfullscreen loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+   </div>
+   <p class="video-error" role="status" aria-live="polite"></p>
+  </div>
+
+</section>
+
+<!-- ЭТАП 3 -->
+<section class="stage" id="stage2">
+ <div class="stage-head">
+  <div><div class="kicker">Этап 03 · Анализ доказательств</div><h2>Экономическая лаборатория</h2><p class="lead">Статистика цен поможет проверить, действительно ли снизилась покупательная способность денег.</p></div>
+  <div class="stage-art"><svg viewBox="0 0 360 190" role="img" aria-label="Экономическая лаборатория с графиками и калькулятором">
+<defs><linearGradient id="s3screen" x2="1" y2="1"><stop stop-color="#243d55"/><stop offset="1" stop-color="#0e1b2b"/></linearGradient><filter id="s3shadow"><feGaussianBlur stdDeviation="5"/></filter></defs>
+<ellipse cx="180" cy="164" rx="130" ry="12" fill="#050b13" opacity=".5" filter="url(#s3shadow)"/>
+<rect x="34" y="18" width="205" height="126" rx="9" fill="url(#s3screen)" stroke="#d6b36b" stroke-width="2.5"/><path d="M55 121V42M55 121h160" stroke="#7f91a5" stroke-width="1.5" opacity=".8"/>
+<path d="M63 103l37-21 34 8 34-40 38-20" fill="none" stroke="#e7c77f" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><g fill="#e7c77f"><circle cx="100" cy="82" r="4"/><circle cx="134" cy="90" r="4"/><circle cx="168" cy="50" r="4"/><circle cx="206" cy="30" r="4"/></g>
+<g transform="translate(251 34)"><rect width="75" height="116" rx="9" fill="#aeb8bf" stroke="#e7d5ad" stroke-width="2"/><rect x="9" y="10" width="57" height="24" rx="3" fill="#26394a"/><text x="37" y="27" text-anchor="middle" fill="#a9d2b8" font-size="13">12,5%</text><g fill="#405367"><rect x="10" y="44" width="14" height="13" rx="2"/><rect x="31" y="44" width="14" height="13" rx="2"/><rect x="52" y="44" width="14" height="13" rx="2"/><rect x="10" y="65" width="14" height="13" rx="2"/><rect x="31" y="65" width="14" height="13" rx="2"/><rect x="52" y="65" width="14" height="13" rx="2"/><rect x="10" y="86" width="14" height="13" rx="2"/><rect x="31" y="86" width="14" height="13" rx="2"/><rect x="52" y="86" width="14" height="13" rx="2"/></g></g>
+<text x="175" y="181" text-anchor="middle" fill="#d6b36b" font-size="9" letter-spacing="3">РАСЧЁТЫ · ДАННЫЕ · ВЫВОДЫ</text>
+</svg></div>
+ </div>
+ <div class="case-note"><span>🧮</span><div><b>Лабораторный протокол</b><br>Все цены приведены в условных учебных данных. Расчёт помогает увидеть изменение стоимости набора товаров.</div></div>
+ <div class="story">«Перед вами условная потребительская корзина страны Экономия. Рассчитайте изменение её стоимости и оцените последствия для разных участников экономики».</div>
+ <div class="task">
+  <h3>Задание 1. Цены говорят сами за себя <span class="small">· 4 балла</span></h3>
+  <div class="table-wrap"><table><thead><tr><th>Товар</th><th>Год назад</th><th>Сейчас</th></tr></thead><tbody><tr><td>Хлеб</td><td>40 руб.</td><td>44 руб.</td></tr><tr><td>Молоко</td><td>80 руб.</td><td>92 руб.</td></tr><tr><td>Яйца</td><td>100 руб.</td><td>120 руб.</td></tr><tr><td>Сахар</td><td>60 руб.</td><td>66 руб.</td></tr><tr><td>Масло</td><td>150 руб.</td><td>180 руб.</td></tr><tr><th>Итого</th><th>430 руб.</th><th>502 руб.</th></tr></tbody></table></div>
+  <p>Формула: <b>I = ((P₁ − P₀) / P₀) × 100%</b></p>
+  <div class="grid2">
+   <label>1. На сколько рублей выросла корзина?<input class="field" id="increaseRub" inputmode="decimal" placeholder="Ответ в рублях"></label>
+   <label>2. На сколько процентов выросла стоимость?<input class="field" id="increasePct" inputmode="decimal" placeholder="Ответ в процентах"></label>
+  </div>
+  <label class="option"><input type="checkbox" id="purchasingPower"> 3. Да, покупательная способность денег снизилась: на прежнюю сумму можно купить меньше товаров.</label>
+  <label class="option"><input type="checkbox" id="fixedIncome"> 4. Семье с фиксированным доходом сложнее сохранять прежний уровень потребления.</label>
+  <button class="btn btn-ghost btn-small" onclick="checkLab()">Проверить расчёты и выводы</button><div class="feedback" id="labFeedback"></div>
+  <button class="btn btn-ghost btn-small" onclick="toggleHint('hint3')">Открыть подсказку</button><div class="hint" id="hint3">502 − 430 = 72 рубля. Для процента разделите 72 на 430 и умножьте на 100. Получится примерно 16,7%. Это изменение стоимости условной корзины, а не официальный показатель инфляции.</div>
+ </div>
+ <div class="task">
+  <h3>Задание 2. Кому инфляция выгодна, а кому нет? <span class="small">· 3 балла</span></h3>
+  <p>Выберите наиболее вероятное последствие инфляции для каждого участника.</p>
+  <div class="grid2">
+   <label>Семья с фиксированной зарплатой<select id="family"><option value="">Выберите ответ</option><option value="down">Снижается реальная покупательная способность дохода</option><option value="up">Покупательная способность обязательно растёт</option></select></label>
+   <label>Пенсионер<select id="pensioner"><option value="">Выберите ответ</option><option value="down">При недостаточном повышении пенсии снижается уровень жизни</option><option value="up">Пенсия автоматически полностью компенсирует рост цен</option></select></label>
+   <label>Предприниматель<select id="businessOwner"><option value="">Выберите ответ</option><option value="down">Могут увеличиться расходы на сырьё и производство</option><option value="up">Производственные расходы всегда уменьшаются</option></select></label>
+   <label>Человек, хранящий наличные<select id="cashSaver"><option value="">Выберите ответ</option><option value="down">Снижается реальная стоимость накоплений</option><option value="up">Реальная стоимость накоплений растёт</option></select></label>
+   <label>Заёмщик с фиксированной ставкой<select id="borrower"><option value="">Выберите ответ</option><option value="down">Реальная тяжесть фиксированного долга может уменьшиться</option><option value="up">Долг обязательно увеличивается в реальном выражении</option></select></label>
+  </div>
+  <p class="small">Баллы начисляются за правильное понимание последствий в пяти ситуациях.</p>
+  <button class="btn btn-ghost btn-small" onclick="checkEffects()">Проверить последствия</button><div class="feedback" id="effectsFeedback"></div>
+ </div>
+ <div class="actions"><button class="btn btn-ghost" onclick="goStage(1)">← Назад</button><button class="btn btn-primary" onclick="completeStage(2)">Перейти к государственному совету →</button></div>
+
+ <div class="video-evidence" data-video-stage="2">
+   <div class="video-evidence-head">
+    <span class="video-kicker">МУЛЬТИМЕДИЙНАЯ УЛИКА</span>
+    <span class="video-platforms">RuTube · VK Видео</span>
+   </div>
+   <h3>Видеоматериал к этапу 3</h3>
+   <p class="video-hint">Нажмите кнопку, чтобы посмотреть видеозапись и продолжить расследование.</p>
+   <button class="btn btn-primary video-load" type="button">▶ Смотреть видео</button>
+   <div class="video-frame-wrap" hidden>
+    <iframe class="video-frame" title="Видеоматериал к этапу 3" allow="autoplay; encrypted-media; fullscreen; picture-in-picture" allowfullscreen loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+   </div>
+   <p class="video-error" role="status" aria-live="polite"></p>
+  </div>
+
+</section>
+
+<!-- ЭТАП 4 -->
+<section class="stage" id="stage3">
+ <div class="stage-head">
+  <div><div class="kicker">Этап 04 · Принятие решений</div><h2>Государство против инфляции</h2><p class="lead">Правительство страны Экономия ждёт рекомендаций. Определите, кто отвечает за экономику и какие меры помогут стабилизировать ситуацию.</p></div>
+  <div class="stage-art"><svg viewBox="0 0 360 190" role="img" aria-label="Здание государственного учреждения и документы">
+<defs><linearGradient id="s4stone" x2="0" y2="1"><stop stop-color="#d9c28f"/><stop offset="1" stop-color="#8f7447"/></linearGradient><filter id="s4shadow"><feGaussianBlur stdDeviation="5"/></filter></defs>
+<ellipse cx="172" cy="164" rx="130" ry="12" fill="#050b13" opacity=".5" filter="url(#s4shadow)"/>
+<path d="M35 69L178 15 322 69Z" fill="url(#s4stone)" stroke="#f0d99f" stroke-width="2.5"/><path d="M47 72h262v12H47z" fill="#b18c4f"/>
+<g fill="#d9c28f" stroke="#f0d99f" stroke-width="1"><rect x="62" y="88" width="28" height="61"/><rect x="119" y="88" width="28" height="61"/><rect x="176" y="88" width="28" height="61"/><rect x="233" y="88" width="28" height="61"/></g><path d="M42 150h274v11H42z" fill="#9c7a45"/>
+<g transform="translate(252 19) rotate(9)"><rect x="0" y="0" width="70" height="86" rx="4" fill="#eee3c9" stroke="#c6a968" stroke-width="2"/><path d="M12 19h45M12 32h45M12 45h34" stroke="#95805a" stroke-width="3"/><circle cx="51" cy="67" r="11" fill="#a84b52"/><path d="M51 58v18M42 67h18" stroke="#f1dca7" stroke-width="1.5"/></g>
+<text x="173" y="181" text-anchor="middle" fill="#d6b36b" font-size="9" letter-spacing="3">ЭКОНОМИЧЕСКАЯ ПОЛИТИКА</text>
+</svg></div>
+ </div>
+ <div class="case-note"><span>🏛️</span><div><b>Протокол заседания</b><br>Разграничьте полномочия Центрального банка и правительства. Не всякая мера одинаково эффективна в любой ситуации.</div></div>
+ <div class="story">«Причины проблемы установлены. Теперь выясните, какие действия государства и Центрального банка могут помочь сдержать инфляцию и поддержать граждан».</div>
+ <div class="task">
+  <h3>Задание 1. Кто отвечает за экономику? <span class="small">· 2 балла</span></h3>
+  <p>Определите, кто выполняет каждое действие.</p>
+  <div class="grid2">
+   <label>1. Установление ключевой ставки<select id="power1"><option value="">Выберите</option><option value="cb">Центральный банк</option><option value="gov">Государство</option></select></label>
+   <label>2. Формирование и исполнение федерального бюджета<select id="power2"><option value="">Выберите</option><option value="cb">Центральный банк</option><option value="gov">Государство</option></select></label>
+   <label>3. Проведение денежно-кредитной политики<select id="power3"><option value="">Выберите</option><option value="cb">Центральный банк</option><option value="gov">Государство</option></select></label>
+   <label>4. Финансирование государственных социальных программ<select id="power4"><option value="">Выберите</option><option value="cb">Центральный банк</option><option value="gov">Государство</option></select></label>
+   <label>5. Организация денежного обращения и обеспечение устойчивости рубля в рамках полномочий<select id="power5"><option value="">Выберите</option><option value="cb">Центральный банк</option><option value="gov">Государство</option></select></label>
+  </div>
+  <button class="btn btn-ghost btn-small" onclick="checkPowers()">Проверить</button><div class="feedback" id="powersFeedback"></div>
+ </div>
+ <div class="task">
+  <h3>Задание 2. Совещание экономистов <span class="small">· 2 балла</span></h3>
+  <p>Выберите меры, которые могут способствовать сдерживанию инфляции.</p>
+  <div class="options">
+   <label class="option"><input type="checkbox" name="measure" value="A"> А. Повышение ключевой ставки Центральным банком.</label>
+   <label class="option"><input type="checkbox" name="measure" value="B"> Б. Неконтролируемое увеличение денежной массы.</label>
+   <label class="option"><input type="checkbox" name="measure" value="C"> В. Сокращение неэффективных государственных расходов.</label>
+   <label class="option"><input type="checkbox" name="measure" value="D"> Г. Повышение производительности труда и расширение предложения товаров.</label>
+   <label class="option"><input type="checkbox" name="measure" value="E"> Д. Увеличение государственных расходов без учёта экономической ситуации.</label>
+   <label class="option"><input type="checkbox" name="measure" value="F"> Е. Взвешенная бюджетная и денежно-кредитная политика.</label>
+  </div>
+  <button class="btn btn-ghost btn-small" onclick="checkMeasures()">Проверить</button><div class="feedback" id="measuresFeedback"></div>
+ </div>
+ <div class="task">
+  <h3>Задание 3. Экономический советник <span class="small">· 3 балла</span></h3>
+  <p>Предложите три рекомендации: как сдержать инфляцию, поддержать граждан с невысокими доходами и создать условия для устойчивого развития.</p>
+  <textarea id="recommendations" placeholder="1. Моя рекомендация по сдерживанию инфляции...&#10;2. Как поддержать граждан...&#10;3. Как развивать производство..."></textarea>
+  <div class="options">
+   <label class="option"><input type="checkbox" id="rec1"> Я предложил(а) меру для сдерживания инфляции.</label>
+   <label class="option"><input type="checkbox" id="rec2"> Я предложил(а) способ поддержки граждан с невысокими доходами.</label>
+   <label class="option"><input type="checkbox" id="rec3"> Я предложил(а) способ развития производства и предложения товаров.</label>
+  </div>
+  <p class="small">По одному баллу за каждую содержательную рекомендацию. Отметьте критерии после того, как записали свои предложения.</p>
+ </div>
+ <div class="actions"><button class="btn btn-ghost" onclick="goStage(2)">← Назад</button><button class="btn btn-primary" onclick="completeStage(3)">К последней улике →</button></div>
+
+ <div class="video-evidence" data-video-stage="3">
+   <div class="video-evidence-head">
+    <span class="video-kicker">МУЛЬТИМЕДИЙНАЯ УЛИКА</span>
+    <span class="video-platforms">RuTube · VK Видео</span>
+   </div>
+   <h3>Видеоматериал к этапу 4</h3>
+   <p class="video-hint">Нажмите кнопку, чтобы посмотреть видеозапись и продолжить расследование.</p>
+   <button class="btn btn-primary video-load" type="button">▶ Смотреть видео</button>
+   <div class="video-frame-wrap" hidden>
+    <iframe class="video-frame" title="Видеоматериал к этапу 4" allow="autoplay; encrypted-media; fullscreen; picture-in-picture" allowfullscreen loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+   </div>
+   <p class="video-error" role="status" aria-live="polite"></p>
+  </div>
+
+</section>
+
+<!-- ЭТАП 5 -->
+<section class="stage" id="stage4">
+ <div class="stage-head">
+  <div><div class="kicker">Этап 05 · Финальное заключение</div><h2>Последняя улика</h2><p class="lead">Все доказательства собраны. Осталось представить аналитическому отделу результаты расследования.</p></div>
+  <div class="stage-art"><svg viewBox="0 0 360 190" role="img" aria-label="Финальное дело с документом, печатью и звездой">
+<defs><linearGradient id="s5paper" x2="1" y2="1"><stop stop-color="#f2e8ce"/><stop offset="1" stop-color="#c9b68c"/></linearGradient><filter id="s5shadow"><feGaussianBlur stdDeviation="5"/></filter></defs>
+<ellipse cx="178" cy="163" rx="118" ry="12" fill="#050b13" opacity=".5" filter="url(#s5shadow)"/>
+<g transform="rotate(-5 166 89)"><rect x="73" y="19" width="170" height="133" rx="7" fill="#a88d5d"/><rect x="83" y="27" width="150" height="116" rx="4" fill="url(#s5paper)" stroke="#f7edcf" stroke-width="1.5"/><text x="158" y="51" text-anchor="middle" fill="#65543a" font-size="11" font-weight="bold" letter-spacing="2">ЗАКЛЮЧЕНИЕ</text><path d="M105 67h105M105 82h105M105 97h78" stroke="#95805a" stroke-width="3" opacity=".8"/><path d="M105 115h50" stroke="#95805a" stroke-width="2" opacity=".6"/></g>
+<circle cx="237" cy="119" r="31" fill="#a84b52" stroke="#e0b0a1" stroke-width="3"/><circle cx="237" cy="119" r="23" fill="none" stroke="#e8c4a9" stroke-width="1.5" stroke-dasharray="3 3"/><text x="237" y="124" fill="#fff" font-size="10" text-anchor="middle" font-weight="bold">ДЕЛО</text>
+<path d="M285 18l9 18 20 3-15 14 4 20-18-10-18 10 4-20-15-14 20-3z" fill="#d6b36b" stroke="#f2d99c" stroke-width="1.5"/>
+<path d="M48 124l17 17m-17-17l-5 20" stroke="#d6b36b" stroke-width="4" stroke-linecap="round"/>
+<text x="177" y="182" text-anchor="middle" fill="#d6b36b" font-size="9" letter-spacing="3">РАССЛЕДОВАНИЕ ЗАВЕРШЕНО</text>
+</svg></div>
+ </div>
+ <div class="case-note"><span>🔎</span><div><b>Финальный протокол</b><br>Используйте доказательства всех предыдущих этапов. Заключение должно быть логичным и аргументированным.</div></div>
+ <div class="story">«Подготовьте заключение объёмом 5–7 предложений. Объясните, что произошло в стране Экономия, почему снизилась покупательная способность денег и какие решения могут помочь».</div>
+ <div class="task">
+  <h3>Финальное задание. Экономическое заключение <span class="small">· 5 баллов</span></h3>
+  <p>В заключении раскройте шесть вопросов: что произошло с экономикой; какое явление снизило покупательную способность; возможные причины; последствия для населения и предприятий; роль государства; наиболее эффективные меры.</p>
+  <textarea id="conclusion" style="min-height:190px" placeholder="Уважаемый аналитический отдел!&#10;&#10;По результатам расследования установлено, что..."></textarea>
+  <div class="options">
+   <label class="option"><input type="checkbox" id="final1"> Я объяснил(а), что произошло с экономикой страны.</label>
+   <label class="option"><input type="checkbox" id="final2"> Я назвал(а) инфляцию и возможные причины.</label>
+   <label class="option"><input type="checkbox" id="final3"> Я описал(а) последствия для населения и предприятий.</label>
+   <label class="option"><input type="checkbox" id="final4"> Я раскрыл(а) роль государства и Центрального банка.</label>
+   <label class="option"><input type="checkbox" id="final5"> Я предложил(а) обоснованные меры решения проблемы.</label>
+  </div>
+  <p class="small">По одному баллу за каждый раскрытый пункт. Это самооценка полноты вашего заключения.</p>
+ </div>
+ <div class="task">
+  <h3>Раскрытие тайны</h3>
+  <p>Закончите фразу:</p>
+  <p style="font-family:'Playfair Display',Georgia,serif;font-size:21px;color:var(--gold2)">«Деньги не исчезли физически, но их покупательная способность снизилась, потому что…»</p>
+  <textarea id="mystery" placeholder="Продолжите фразу..."></textarea>
+ </div>
+ <div class="actions"><button class="btn btn-ghost" onclick="goStage(3)">← Назад</button><button class="btn btn-primary" onclick="finishQuest()">Завершить расследование</button></div>
+
+ <div class="video-evidence" data-video-stage="4">
+   <div class="video-evidence-head">
+    <span class="video-kicker">МУЛЬТИМЕДИЙНАЯ УЛИКА</span>
+    <span class="video-platforms">RuTube · VK Видео</span>
+   </div>
+   <h3>Видеоматериал к этапу 5</h3>
+   <p class="video-hint">Нажмите кнопку, чтобы посмотреть видеозапись и продолжить расследование.</p>
+   <button class="btn btn-primary video-load" type="button">▶ Смотреть видео</button>
+   <div class="video-frame-wrap" hidden>
+    <iframe class="video-frame" title="Видеоматериал к этапу 5" allow="autoplay; encrypted-media; fullscreen; picture-in-picture" allowfullscreen loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+   </div>
+   <p class="video-error" role="status" aria-live="polite"></p>
+  </div>
+
+</section>
+
+<section id="final" class="hidden">
+ <div class="panel">
+  <div class="kicker">Дело № 026 · Итоговый протокол</div>
+  <h2>Расследование завершено</h2>
+  <p class="lead">Вы изучили улики, проанализировали статистику и подготовили экономическое заключение. Аналитический отдел благодарит вас за работу.</p>
+  <div class="result-grid">
+   <div class="result-tile"><span class="small">Ваш результат</span><strong id="finalScore">0 / 30</strong><span class="small">баллов</span></div>
+   <div class="result-tile"><span class="small">Школьная отметка</span><strong id="finalGrade">—</strong><span class="small" id="gradeText">Итог расследования</span></div>
+   <div class="result-tile"><span class="small">Пройдено этапов</span><strong>5 / 5</strong><span class="small">дело закрыто</span></div>
+  </div>
+  <div class="certificate">
+   <div class="bigseal">✦</div>
+   <div class="eyebrow">Сертификат аналитического отдела</div>
+   <h2 style="margin:8px 0">Экономический аналитик</h2>
+   <p>Награждается <b id="certName">Экономический аналитик</b><span id="certClass"></span><br>за прохождение веб-квеста<br><b>«Экономический детектив: тайна исчезающих денег»</b></p>
+   <div style="font-size:28px;color:var(--gold2);font-family:'Playfair Display',Georgia,serif;margin:15px" id="certScore">0 из 30 баллов</div>
+   <div class="stamp">ДЕЛО РАСКРЫТО</div>
+  </div>
+  <h3>Результаты по этапам</h3>
+  <div id="stageResults"></div>
+  <div class="task"><h3>Ваше аналитическое заключение</h3><p id="savedConclusion" style="white-space:pre-wrap;color:#d4dce5"></p></div>
+  <div class="actions">
+   <button class="btn btn-primary" onclick="window.print()">Распечатать результат</button>
+   <button class="btn btn-ghost" onclick="restartQuest()">Пройти расследование заново</button>
+  </div>
+ </div>
+</section>
+</section>
+<footer class="footer">Экономический детектив · Обществознание, 9 класс · Учебная игровая работа</footer>
+</div>
+
+<script>
+const STORAGE_KEY='economicDetective026';
+const maxByStage=[5,6,7,7,5];
+let scores=[0,0,0,0,0], checked={money:false,cases:false,causes:false,types:false,lab:false,effects:false,powers:false,measures:false};
+let current=0;
+const $=id=>document.getElementById(id);
+function startQuest(){$('intro').classList.add('hidden');$('game').classList.remove('hidden');restore();goStage(current);}
+function goStage(n){current=n;document.querySelectorAll('.stage').forEach((s,i)=>s.classList.toggle('active',i===n));document.querySelectorAll('.route-item').forEach((b,i)=>{b.classList.toggle('active',i===n);b.classList.toggle('done',i<n)});updateScore();window.scrollTo({top:$('game').offsetTop-10,behavior:'smooth'});}
+function toggleHint(id){$(id).classList.toggle('show')}
+function setFeedback(id,msg,good){$(id).textContent=msg;$(id).className='feedback '+(good?'good':'bad')}
+function updateScore(){
+ const done=document.querySelectorAll('.route-item.done').length;
+ $('liveScore').textContent=scores.reduce((a,b)=>a+b,0);
+ $('progressText').textContent=Math.min(5,done+(current>=0?1:0))+' из 5 этапов в работе';
+ $('progressFill').style.width=(Math.min(5,done+(current>=0?1:0))*20)+'%';
+}
+function award(stage,points){scores[stage]=Math.max(0,Math.min(maxByStage[stage],points));updateScore();save();}
+function buildMoney(){
+ const rows=[['1. Покупатель оплачивает продукты в магазине','exchange'],['2. Человек откладывает деньги на покупку автомобиля','saving'],['3. Магазин устанавливает цену товара — 500 рублей','measure'],['4. Покупатель погашает задолженность по кредиту','payment']];
+ const opts=[['','Выберите функцию'],['measure','Мера стоимости'],['exchange','Средство обращения'],['saving','Средство накопления'],['payment','Средство платежа']];
+ $('matchMoney').innerHTML=rows.map((r,i)=>`<div class="question"><label>${r[0]}<select id="money${i}">${opts.map(o=>`<option value="${o[0]}">${o[1]}</option>`).join('')}</select></label></div>`).join('');
+}
+function checkMoney(){const a=['exchange','saving','measure','payment'];let p=a.filter((v,i)=>$('money'+i).value===v).length;award(0,p);checked.money=true;setFeedback('moneyFeedback',`Правильно: ${p} из 4.`,p===4);save();}
+function recalcStage2(){
+ let pts=0;
+ if(checked.cases){let a=[...document.querySelectorAll('[name="inflationCase"]:checked')].map(x=>x.value).sort().join('');pts+=(a==='BD'?2:0)}
+ if(checked.causes){pts+=($('demandCause').value==='A'?1:0)+($('costCause').value==='B'?1:0)}
+ if(checked.types){let p=($('moderate').value==='Умеренная'?1:0)+($('galloping').value==='Галопирующая'?1:0)+($('hyper').value==='Гиперинфляция'?1:0);pts+=p===3?2:p>=2?1:0}
+ award(1,pts);
+}
+function checkInflationCases(){checked.cases=true;recalcStage2();let a=[...document.querySelectorAll('[name="inflationCase"]:checked')].map(x=>x.value).sort().join('');let ok=a==='BD';setFeedback('inflationFeedback',ok?'Верно! Инфляцию характеризуют ситуации Б и Г.':'Проверьте выбор: правильные варианты — Б и Г.',ok);save();}
+function checkCauses(){checked.causes=true;recalcStage2();let p=($('demandCause').value==='A'?1:0)+($('costCause').value==='B'?1:0);setFeedback('causesFeedback',`Верно: ${p} из 2. Инфляция спроса — рост спроса; инфляция издержек — рост затрат.`,p===2);save();}
+function checkTypes(){checked.types=true;recalcStage2();let p=($('moderate').value==='Умеренная'?1:0)+($('galloping').value==='Галопирующая'?1:0)+($('hyper').value==='Гиперинфляция'?1:0);setFeedback('typesFeedback',`Правильно определено: ${p} из 3.`,p===3);save();}
+function checkLab(){let rub=Math.abs(parseFloat(($('increaseRub').value||'').replace(',','.'))-72)<.01;let pct=Math.abs(parseFloat(($('increasePct').value||'').replace(',','.'))-16.7)<.15;let p=(rub?1:0)+(pct?1:0)+($('purchasingPower').checked?1:0)+($('fixedIncome').checked?1:0);award(2,p);checked.lab=true;setFeedback('labFeedback',`Верно: ${p} из 4. Увеличение — 72 руб., примерно 16,7%.`,p===4);save();}
+function recalcStage3(){
+ let pts=0;
+ if(checked.lab){
+  let rub=Math.abs(parseFloat(($('increaseRub').value||'').replace(',','.'))-72)<.01;
+  let pct=Math.abs(parseFloat(($('increasePct').value||'').replace(',','.'))-16.7)<.15;
+  pts+=(rub?1:0)+(pct?1:0)+($('purchasingPower').checked?1:0)+($('fixedIncome').checked?1:0);
+ }
+ if(checked.effects){
+  let ids=['family','pensioner','businessOwner','cashSaver','borrower'];
+  let p=ids.filter(id=>$(id).value==='down').length;
+  pts+=(p===5?3:p>=4?2:p>=3?1:0);
+ }
+ award(2,pts);
+}
+function checkLab(){
+ checked.lab=true;recalcStage3();
+ let rub=Math.abs(parseFloat(($('increaseRub').value||'').replace(',','.'))-72)<.01;
+ let pct=Math.abs(parseFloat(($('increasePct').value||'').replace(',','.'))-16.7)<.15;
+ let p=(rub?1:0)+(pct?1:0)+($('purchasingPower').checked?1:0)+($('fixedIncome').checked?1:0);
+ setFeedback('labFeedback',`Верно: ${p} из 4. Увеличение — 72 руб., примерно 16,7%. Это расчёт по условной корзине, не официальный показатель инфляции.`,p===4);save();
+}
+function checkEffects(){
+ checked.effects=true;recalcStage3();
+ let ids=['family','pensioner','businessOwner','cashSaver','borrower'];
+ let p=ids.filter(id=>$(id).value==='down').length;
+ setFeedback('effectsFeedback',`Правильно: ${p} из 5 ситуаций. За это задание можно получить до 3 баллов.`,p===5);save();
+}
+function recalcStage4(){
+ let pts=0;
+ if(checked.powers){let a=['cb','gov','cb','gov','cb'];let p=a.filter((v,i)=>$('power'+(i+1)).value===v).length;pts+=p===5?2:p>=3?1:0}
+ if(checked.measures){let a=[...document.querySelectorAll('[name="measure"]:checked')].map(x=>x.value).sort().join('');pts+=a==='ACDF'?2:0}
+ if(checked.recommendations){pts+=['rec1','rec2','rec3'].filter(id=>$(id).checked).length}
+ award(3,pts);
+}
+function checkPowers(){checked.powers=true;recalcStage4();let a=['cb','gov','cb','gov','cb'];let p=a.filter((v,i)=>$('power'+(i+1)).value===v).length;setFeedback('powersFeedback',`Правильно распределено: ${p} из 5.`,p===5);save();}
+function checkMeasures(){checked.measures=true;recalcStage4();let a=[...document.querySelectorAll('[name="measure"]:checked')].map(x=>x.value).sort().join('');let ok=a==='ACDF';setFeedback('measuresFeedback',ok?'Верно! Подходящие меры: А, В, Г и Е.':'Правильные варианты: А, В, Г и Е.',ok);save();}
+function completeStage(n){
+ if(n===0){checkMoney();let self=$('moneySelf').checked?1:0;award(0,scores[0]+self)}
+ if(n===1){checkInflationCases();checkCauses();checkTypes();}
+ if(n===2){checkLab();checkEffects();}
+ if(n===3){checkPowers();checkMeasures();checked.recommendations=true;recalcStage4();}
+ if(n===4){goStage(4);return}
+ goStage(n+1);updateScore();
+}
+function finishQuest(){
+ let finalPts=['final1','final2','final3','final4','final5'].filter(id=>$(id).checked).length;
+ award(4,finalPts);
+ // Open response items are assessed with the learner checklist; scores are capped at the scenario's stage maximum.
+ let total=scores.reduce((a,b)=>a+b,0);
+ $('game').classList.add('hidden');$('final').classList.remove('hidden');
+ $('finalScore').textContent=total+' / 30';$('certScore').textContent=total+' из 30 баллов';
+ let grade=total>=27?5:total>=22?4:total>=16?3:2;
+ $('finalGrade').textContent=grade;
+ $('gradeText').textContent=grade===5?'Отличная работа':grade===4?'Хорошая работа':grade===3?'Базовый уровень освоен':'Есть темы для повторения';
+ $('stageResults').innerHTML=maxByStage.map((m,i)=>`<div class="question"><b>Этап ${i+1}</b><span style="float:right;color:var(--gold2)">${scores[i]} / ${m}</span><div class="progress-track"><div class="progress-fill" style="width:${scores[i]/m*100}%"></div></div></div>`).join('');
+ $('savedConclusion').textContent=$('conclusion').value||'Заключение не заполнено.';
+ $('certName').textContent=$('studentName').value.trim()||'Экономический аналитик';
+ $('certClass').textContent=$('studentClass').value.trim()?' · '+$('studentClass').value.trim():'';
+ // Удалено обращение к отсутствующему элементу reflectionResult: оно прерывало завершение квеста.
+ save();window.scrollTo({top:0,behavior:'smooth'});
+}
+function save(){try{let data={scores,checked,fields:{}};document.querySelectorAll('input,textarea,select').forEach((el,i)=>{let key=el.id||('field_'+i);data.fields[key]=el.type==='checkbox'?el.checked:el.value});localStorage.setItem(STORAGE_KEY,JSON.stringify(data))}catch(e){}}
+function restore(){try{let d=JSON.parse(localStorage.getItem(STORAGE_KEY)||'null');if(!d)return;scores=d.scores||scores;checked=d.checked||checked;Object.entries(d.fields||{}).forEach(([id,v])=>{let el=$(id);if(el){if(el.type==='checkbox')el.checked=v;else el.value=v}else if(id.startsWith('field_')){let all=[...document.querySelectorAll('input,textarea,select')];let target=all[Number(id.slice(6))];if(target){if(target.type==='checkbox')target.checked=v;else target.value=v}}});updateScore()}catch(e){}}
+function restartQuest(){if(!confirm('Начать расследование заново? Текущий результат и ответы будут очищены.'))return;localStorage.removeItem(STORAGE_KEY);location.reload()}
+document.addEventListener('change',e=>{if(e.target.matches('input,textarea,select'))save()});
+buildMoney();restore();
+</script>
+
+<script>
+/*
+  НАСТРОЙКА ВИДЕО ДЛЯ УЧИТЕЛЯ:
+  Вставьте ссылки на видео в соответствующие строки ниже.
+  Этап 1 — первая ссылка, Этап 2 — вторая и т.д.
+  Поддерживаются публичные ссылки RuTube и VK Видео.
+  Пример формата RuTube: https://rutube.ru/video/ИДЕНТИФИКАТОР/
+  Пример формата VK: https://vk.com/video-123456_789012
+*/
+const VIDEO_URLS = [
+  "https://rutube.ru/video/fd55b3549ef1fe3e5299f7301fa9d044/", // Этап 1
+  "", // Этап 2
+  "", // Этап 3
+  "", // Этап 4
+  ""  // Этап 5
+];
+
+(function(){
+  function makeEmbed(raw){
+    let u;
+    try { u = new URL(raw.trim()); }
+    catch(e) { throw new Error("Ссылка на видео не настроена. Обратитесь к учителю."); }
+    const host = u.hostname.toLowerCase().replace(/^www\./,"");
+    if (host === "rutube.ru" || host === "rutube.com" || host.endsWith(".rutube.ru")) {
+      if (/\/play\/embed\//.test(u.pathname)) return u.href;
+      const m = u.pathname.match(/\/video\/([a-zA-Z0-9_-]+)/);
+      if (m) return "https://rutube.ru/play/embed/" + m[1];
+      throw new Error("Не удалось распознать ссылку RuTube.");
+    }
+    if (host === "vk.com" || host === "m.vk.com" || host === "vkvideo.ru" || host.endsWith(".vk.com")) {
+      if (u.pathname.includes("video_ext.php") || u.pathname.includes("clip_ext.php")) return u.href;
+      const m = u.pathname.match(/\/video(-?\d+)_(\d+)/);
+      if (m) return "https://vk.com/video_ext.php?oid=" + m[1] + "&id=" + m[2] + "&hd=2";
+      const c = u.pathname.match(/\/clip(-?\d+)_(\d+)/);
+      if (c) return "https://vk.com/clip_ext.php?oid=" + c[1] + "&id=" + c[2];
+      throw new Error("Не удалось распознать ссылку VK Видео. Используйте обычную ссылку на ролик.");
+    }
+    throw new Error("Поддерживаются только RuTube и VK Видео.");
+  }
+  document.querySelectorAll(".video-evidence").forEach(function(box){
+    const index = Number(box.dataset.videoStage);
+    const button = box.querySelector(".video-load");
+    const frame = box.querySelector(".video-frame");
+    const wrap = box.querySelector(".video-frame-wrap");
+    const error = box.querySelector(".video-error");
+    const raw = VIDEO_URLS[index] || "";
+    if (!raw.trim()) {
+      button.disabled = true;
+      button.textContent = "Видео пока не добавлено";
+      button.title = "Учитель добавит ссылку на видео";
+      button.style.opacity = ".65";
+      return;
+    }
+    button.addEventListener("click", function(){
+      error.textContent = "";
+      try {
+        frame.src = makeEmbed(raw);
+        wrap.hidden = false;
+        wrap.scrollIntoView({behavior:"smooth",block:"nearest"});
+      } catch(e) {
+        frame.removeAttribute("src");
+        wrap.hidden = true;
+        error.textContent = e.message;
+      }
+    });
+  });
+})();
+</script>
+
+</body>
+</html>
